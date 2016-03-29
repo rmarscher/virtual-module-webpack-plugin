@@ -1,4 +1,4 @@
-# Virtual Module Webpack Plugin [![Build Status](https://travis-ci.org/rmarscher/virtual-module-webpack-plugin.svg?branch=master)](https://travis-ci.org/rmarscher/virtual-module-webpack-plugin) [![codecov.io](https://codecov.io/github/rmarscher/virtual-module-webpack-plugin/coverage.svg?branch=master)](https://codecov.io/github/rmarscher/virtual-module-webpack-plugin?branch=master) [![npm package](https://badge.fury.io/js/virtual-module-webpack-plugin.svg)](https://www.npmjs.com/package/vue-loader)
+# Virtual Module Webpack Plugin [![Build Status](https://travis-ci.org/rmarscher/virtual-module-webpack-plugin.svg?branch=master)](https://travis-ci.org/rmarscher/virtual-module-webpack-plugin) [![codecov.io](https://codecov.io/github/rmarscher/virtual-module-webpack-plugin/coverage.svg?branch=master)](https://codecov.io/github/rmarscher/virtual-module-webpack-plugin?branch=master) [![npm package](https://badge.fury.io/js/virtual-module-webpack-plugin.svg)](https://www.npmjs.com/package/virtual-module-webpack-plugin)
 
 This is an experimental plugin that adds the contents of a virtual file to
 Webpack's cached file system without writing it to disk.

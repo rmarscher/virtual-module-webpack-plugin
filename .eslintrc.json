@@ -1,0 +1,17 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "script"
+  },
+  "env": {
+    "node": true
+  },
+  "root": true,
+  "rules": {
+    "indent": [2, 2],
+    "no-param-reassign": 0,
+    "strict": [2, "global"]
+  }
+}

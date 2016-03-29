@@ -1,0 +1,20 @@
+{
+  "name": "virtual-module-webpack-plugin-example",
+  "version": "1.0.0",
+  "description": "An example of using the virtual-module-webpack-plugin",
+  "scripts": {
+    "build": "webpack",
+    "fix": "npm run lint -- --fix",
+    "lint": "eslint . ./"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.0.0",
+    "css-loader": "^0.23.1",
+    "eslint": "^2.4.0",
+    "eslint-config-airbnb": "^6.2.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "json-loader": "^0.5.4",
+    "style-loader": "^0.13.1",
+    "webpack": "^2.1.0-beta.4"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "name": "virtual-module-webpack-plugin",
+  "version": "0.1.0",
+  "author": "Rob Marscher @rmarscher",
+  "description": "Adds the contents of a virtual file to webpack's cached file system without writing it to disk",
+  "engines": {
+    "node": ">= 4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rmarscher/virtual-module-webpack-plugin.git"
+  },
+  "keywords": [
+    "webpack",
+    "plugin"
+  ],
+  "bugs": {
+    "url": "https://github.com/rmarscher/virtual-module-webpack-plugin/issues"
+  },
+  "homepage": "https://github.com/rmarscher/virtual-module-webpack-plugin",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/mit-license.php"
+    }
+  ],
+  "scripts": {
+    "fix": "npm run lint -- --fix",
+    "lint": "eslint . ./",
+    "publish-patch": "mocha && npm version patch && git push && git push --tags && npm publish",
+    "test": "tap test/unit/*.* test/integration/*.* --coverage"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.0.0",
+    "css-loader": "^0.23.1",
+    "enhanced-resolve": "^2.2.2",
+    "eslint": "^2.4.0",
+    "eslint-config-airbnb": "^6.2.0",
+    "json-loader": "^0.5.4",
+    "raw-loader": "^0.5.1",
+    "style-loader": "^0.13.1",
+    "tap": "^5.7.0",
+    "webpack": "^2.1.0-beta.4"
+  },
+  "config": {
+    "nyc": {
+      "exclude": [
+        "node_modules/**",
+        "test/**"
+      ]
+    }
+  }
+}

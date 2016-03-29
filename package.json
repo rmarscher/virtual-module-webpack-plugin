@@ -22,7 +22,7 @@
   "scripts": {
     "fix": "npm run lint -- --fix",
     "lint": "eslint . ./",
-    "publish-patch": "mocha && npm version patch && git push && git push --tags && npm publish",
+    "publish-patch": "npm run test && npm version patch && git push && git push --tags && npm publish",
     "test": "tap test/unit/*.* test/integration/*.* --coverage"
   },
   "devDependencies": {

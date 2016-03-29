@@ -9,7 +9,8 @@ module.exports = function webpackConfig() {
     greeting: 'Hello!',
   });
   const runtimeStyleContents = `
-    body { background: #000; }
+    body { background: #000; color: #ccc; }
+    .greeting { font: 600 40px/50px fantasy; text-align: center; }
   `;
 
   const config = {

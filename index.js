@@ -37,15 +37,12 @@ class VirtualModulePlugin {
     const fs = options.fs;
     const modulePath = options.modulePath;
     const contents = options.contents;
-    if (!fs._virtual) {
-      fs._virtual = [];
+    if (fs._readFileStorage.data[modulePath]) {
+      return;
     }
-    if (!fs._virtual[modulePath]) {
-      fs._virtual[modulePath] = true;
-      fs._readFileStorage.data[modulePath] = [null, contents];
-      const stats = VirtualModulePlugin.createStats(options);
-      fs._statStorage.data[modulePath] = [null, stats];
-    }
+    const stats = VirtualModulePlugin.createStats(options);
+    fs._statStorage.data[modulePath] = [null, stats];
+    fs._readFileStorage.data[modulePath] = [null, contents];
   }
 
   static statsDate(inputDate) {

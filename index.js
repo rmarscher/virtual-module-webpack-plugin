@@ -16,11 +16,20 @@ class VirtualModulePlugin {
     compiler.resolvers.normal.plugin('resolve', function resolverPlugin(request, cb) {
       // populate the file system cache with the virtual module
       const fs = this.fileSystem;
+
+      // webpack 1.x compatibility
+      if (typeof request === 'string') {
+        request = cb;
+        cb = null;
+      }
+
       if (!modulePath) {
         modulePath = this.join(compiler.context, moduleName);
       }
       VirtualModulePlugin.populateFilesystem({ fs, modulePath, contents, ctime });
-      cb();
+      if (cb) {
+        cb();
+      }
     });
   }
 
@@ -34,7 +43,6 @@ class VirtualModulePlugin {
     if (!fs._virtual[modulePath]) {
       fs._virtual[modulePath] = true;
       fs._readFileStorage.data[modulePath] = [null, contents];
-      fs._readJsonStorage.data[modulePath] = [null, contents];
       const stats = VirtualModulePlugin.createStats(options);
       fs._statStorage.data[modulePath] = [null, stats];
     }

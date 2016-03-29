@@ -18,12 +18,7 @@
     "url": "https://github.com/rmarscher/virtual-module-webpack-plugin/issues"
   },
   "homepage": "https://github.com/rmarscher/virtual-module-webpack-plugin",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://www.opensource.org/licenses/mit-license.php"
-    }
-  ],
+  "license": "MIT",
   "scripts": {
     "fix": "npm run lint -- --fix",
     "lint": "eslint . ./",
@@ -36,12 +31,13 @@
     "enhanced-resolve": "^2.2.2",
     "eslint": "^2.4.0",
     "eslint-config-airbnb": "^6.2.0",
+    "eslint-plugin-react": "^4.2.3",
     "extract-text-webpack-plugin": "^1.0.1",
     "json-loader": "^0.5.4",
     "raw-loader": "^0.5.1",
     "style-loader": "^0.13.1",
     "tap": "^5.7.0",
-    "webpack": "^2.1.0-beta.4"
+    "webpack": "^1.12.14"
   },
   "config": {
     "nyc": {

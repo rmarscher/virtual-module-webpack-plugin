@@ -1,6 +1,6 @@
 {
   "name": "virtual-module-webpack-plugin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Rob Marscher @rmarscher",
   "description": "Adds the contents of a virtual file to webpack's cached file system without writing it to disk",
   "engines": {

@@ -23,7 +23,8 @@ the virtual file would no longer exist in the cache.
 ## Usage
 
 In your webpack.config.js, require the plugin:
-```
+
+```js
 const VirtualModulePlugin = require('./virtual-module-webpack-plugin');
 ```
 
@@ -34,7 +35,7 @@ config's plugins array.
 The `moduleName` should be relative to your webpack config context
 which defaults to the directory holding the webpack.config.js file.
 
-```
+```js
   plugins: [
     new VirtualModulePlugin({
       moduleName: 'src/mysettings.json',

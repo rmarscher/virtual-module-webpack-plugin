@@ -11,6 +11,9 @@
   "root": true,
   "rules": {
     "indent": [2, 2],
-    "strict": [2, "global"]
+    "strict": [2, "global"],
+    "import/no-extraneous-dependencies": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off"
   }
 }

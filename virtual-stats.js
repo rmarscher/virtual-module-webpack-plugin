@@ -32,7 +32,7 @@ class VirtualStats {
    * @return {boolean} Property matches mode.
    */
   _checkModeProperty(property) {
-    return ((this.mode & constants.S_IFMT) === property);
+    return ((this.mode & constants.fs.S_IFMT) === property);
   }
 
 
@@ -40,7 +40,7 @@ class VirtualStats {
    * @return {Boolean} Is a directory.
    */
   isDirectory() {
-    return this._checkModeProperty(constants.S_IFDIR);
+    return this._checkModeProperty(constants.fs.S_IFDIR);
   }
 
 
@@ -48,7 +48,7 @@ class VirtualStats {
    * @return {Boolean} Is a regular file.
    */
   isFile() {
-    return this._checkModeProperty(constants.S_IFREG);
+    return this._checkModeProperty(constants.fs.S_IFREG);
   }
 
 
@@ -56,7 +56,7 @@ class VirtualStats {
    * @return {Boolean} Is a block device.
    */
   isBlockDevice() {
-    return this._checkModeProperty(constants.S_IFBLK);
+    return this._checkModeProperty(constants.fs.S_IFBLK);
   }
 
 
@@ -64,7 +64,7 @@ class VirtualStats {
    * @return {Boolean} Is a character device.
    */
   isCharacterDevice() {
-    return this._checkModeProperty(constants.S_IFCHR);
+    return this._checkModeProperty(constants.fs.S_IFCHR);
   }
 
 
@@ -72,7 +72,7 @@ class VirtualStats {
    * @return {Boolean} Is a symbolic link.
    */
   isSymbolicLink() {
-    return this._checkModeProperty(constants.S_IFLNK);
+    return this._checkModeProperty(constants.fs.S_IFLNK);
   }
 
 
@@ -80,7 +80,7 @@ class VirtualStats {
    * @return {Boolean} Is a named pipe.
    */
   isFIFO() {
-    return this._checkModeProperty(constants.S_IFIFO);
+    return this._checkModeProperty(constants.fs.S_IFIFO);
   }
 
 
@@ -88,7 +88,7 @@ class VirtualStats {
    * @return {Boolean} Is a socket.
    */
   isSocket() {
-    return this._checkModeProperty(constants.S_IFSOCK);
+    return this._checkModeProperty(constants.fs.S_IFSOCK);
   }
 }
 

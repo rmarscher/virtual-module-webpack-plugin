@@ -1,7 +1,7 @@
 'use strict';
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const VirtualModulePlugin = require('../../../../');
+const VirtualModulePlugin = require('../../../../index');
 
 module.exports = function webpackConfig() {
   return {

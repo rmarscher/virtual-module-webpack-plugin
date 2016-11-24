@@ -1,5 +1,5 @@
-import greeting from './greeting';
 import 'css/generated.css';
+import greeting from './greeting';
 
 console.log(greeting);
 

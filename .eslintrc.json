@@ -12,6 +12,14 @@
   "rules": {
     "indent": [2, 2],
     "no-param-reassign": 0,
-    "strict": [2, "global"]
+    "strict": [2, "global"],
+    "no-underscore-dangle": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "global-require": "off",
+    "no-restricted-syntax": "off",
+    "no-prototype-builtins": "off",
+    "no-continue": "off"
   }
 }

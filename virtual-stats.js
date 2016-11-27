@@ -11,11 +11,14 @@
 /**
  * On node 6.x the fs constants are located in process.binding('constants').fs...
  */
-const constants      =
-          process.versions.node.split('.')[0] > 6 ?// not tested on 5.x
-          process.binding('constants').fs
-              :
-          process.binding('constants');
+let constants = process.binding('constants');
+constants     = constants.fs || constants;
+
+// const constants      =
+//           process.versions.node.split('.')[0] > 6 ?// not tested on 5.x
+//           process.binding('constants').fs
+//               :
+//           process.binding('constants');
 
 class VirtualStats {
     /**

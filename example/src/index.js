@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved, import/no-extraneous-dependencies */
 import 'css/generated.css';
 import greeting from './greeting';
 

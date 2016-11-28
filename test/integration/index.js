@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+
 'use strict';
 
 const tap = require('tap');
@@ -25,6 +27,7 @@ function runTestCase(testCase) {
 
     const configFile = path.join(testDirectory, 'webpack.config.js');
     if (fs.existsSync(configFile)) {
+      // eslint-disable-next-line import/no-dynamic-require, global-require
       options = require(configFile)();
     }
     options.context = testDirectory;
@@ -54,6 +57,7 @@ function runTestCase(testCase) {
       }
       const testFile = path.join(outputDirectory, 'test.js');
       if (fs.existsSync(testFile)) {
+        // eslint-disable-next-line import/no-dynamic-require, global-require
         require(testFile)(t);
       }
       const expectedDirectory = path.join(testDirectory, 'expected');

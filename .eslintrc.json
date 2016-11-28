@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb",
+  "extends": "airbnb-base",
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "script"
@@ -10,16 +10,15 @@
   },
   "root": true,
   "rules": {
-    "indent": [2, 2],
-    "no-param-reassign": 0,
-    "strict": [2, "global"],
-    "no-underscore-dangle": "off",
-    "import/no-extraneous-dependencies": "off",
-    "import/no-unresolved": "off",
-    "import/extensions": "off",
-    "global-require": "off",
-    "no-restricted-syntax": "off",
-    "no-prototype-builtins": "off",
-    "no-continue": "off"
+    "comma-dangle": ["error", {
+      "arrays": "only-multiline",
+      "objects": "only-multiline",
+      "imports": "only-multiline",
+      "exports": "only-multiline",
+      "functions": "never"
+    }],
+    "indent": ["error", 2],
+    "no-param-reassign": "off",
+    "strict": ["error", "global"]
   }
 }

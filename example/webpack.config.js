@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const VirtualModulePlugin = require('../index');
 
@@ -29,11 +30,14 @@ module.exports = function webpackConfig() {
       loaders: [
         {
           test: /\.json$/,
-          loaders: ['json'],
+          loaders: ['json-loader'],
         },
         {
           test: /\.css$/,
-          loader: ExtractTextPlugin.extract('style', 'css?sourceMap'),
+          loader: ExtractTextPlugin.extract({
+            fallbackLoader: 'style-loader',
+            loader: 'css-loader?sourceMap',
+          }),
         },
       ],
     },
@@ -46,7 +50,10 @@ module.exports = function webpackConfig() {
         moduleName: 'src/css/generated.css',
         contents: runtimeStyleContents,
       }),
-      new ExtractTextPlugin('[name].css', { allChunks: true }),
+      new ExtractTextPlugin({
+        filename: '[name].css',
+        allChunks: true,
+      }),
     ],
     resolve: {
       modules: [

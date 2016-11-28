@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+
 'use strict';
 
 const VirtualStats = require('./virtual-stats');

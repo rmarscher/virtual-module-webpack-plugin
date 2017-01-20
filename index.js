@@ -15,7 +15,7 @@ class VirtualModulePlugin {
     const ctime = VirtualModulePlugin.statsDate();
     let modulePath = this.options.path;
 
-    compiler.resolvers.normal.plugin('resolve', function resolverPlugin(request, cb) {
+    function resolverPlugin(request, cb) {
       // populate the file system cache with the virtual module
       const fs = this.fileSystem;
 
@@ -32,7 +32,15 @@ class VirtualModulePlugin {
       if (cb) {
         cb();
       }
-    });
+    }
+
+    if (!compiler.resolvers.normal) {
+      compiler.plugin('after-resolvers', () => {
+        compiler.resolvers.normal.plugin('resolve', resolverPlugin);
+      });
+    } else {
+      compiler.resolvers.normal.plugin('resolve', resolverPlugin);
+    }
   }
 
   static populateFilesystem(options) {

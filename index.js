@@ -11,9 +11,20 @@ class VirtualModulePlugin {
 
   apply(compiler) {
     const moduleName = this.options.moduleName;
-    const contents = this.options.contents;
     const ctime = VirtualModulePlugin.statsDate();
     let modulePath = this.options.path;
+
+    let contents;
+    if (typeof this.options.contents === 'string') {
+      contents = this.options.contents;
+    }
+    if (typeof this.options.contents === 'object') {
+      contents = JSON.stringify(this.options.contents);
+    }
+    if (typeof this.options.contents === 'function') {
+      //call then function must be return string
+      contents = this.options.contents();
+    }
 
     function resolverPlugin(request, cb) {
       // populate the file system cache with the virtual module

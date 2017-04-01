@@ -52,4 +52,4 @@ If you pass an object to contents, it will automatically be passed through
 `JSON.stringify`. You can also pass a function to contents which will be
 invoked at compile time with no arguments. See [pull #10](https://github.com/rmarscher/virtual-module-webpack-plugin/pull/10).
 
-See the example directory for a complete working example.
+See the examples directory for a complete working examples with webpack 1.x or 2.x.

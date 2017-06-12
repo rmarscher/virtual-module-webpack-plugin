@@ -22,7 +22,7 @@ class VirtualModulePlugin {
       contents = JSON.stringify(this.options.contents);
     }
     if (typeof this.options.contents === 'function') {
-      //call then function must be return string
+      // call then function must be return string
       contents = this.options.contents();
     }
 
@@ -39,10 +39,19 @@ class VirtualModulePlugin {
       if (!modulePath) {
         modulePath = this.join(compiler.context, moduleName);
       }
-      VirtualModulePlugin.populateFilesystem({ fs, modulePath, contents, ctime });
-      if (cb) {
-        cb();
+
+      const resolve = (data) => {
+        VirtualModulePlugin.populateFilesystem({ fs, modulePath, contents: data, ctime });
+      };
+
+      if (!cb) {
+        resolve(contents);
+        return;
       }
+
+      Promise.resolve(contents)
+        .then(resolve)
+        .then(cb);
     }
 
     if (!compiler.resolvers.normal) {

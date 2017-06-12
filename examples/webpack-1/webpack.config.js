@@ -3,7 +3,8 @@
 const path = require('path');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const VirtualModulePlugin = require('../index');
+// in actual use, you would `require('virtual-module-webpack-plugin')` here
+const VirtualModulePlugin = require('../../index');
 
 module.exports = function webpackConfig() {
   const runtimeJsonContents = JSON.stringify({

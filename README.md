@@ -53,3 +53,41 @@ If you pass an object to contents, it will automatically be passed through
 invoked at compile time with no arguments. See [pull #10](https://github.com/rmarscher/virtual-module-webpack-plugin/pull/10).
 
 See the examples directory for a complete working examples with webpack 1.x or 2.x.
+
+If you need to fetch the contents asynchronously, you need to have your `webpack.config.js`
+return a Promise. It should first resolve getting your module contents and then
+return the Webpack config.
+
+A few development attempts were made at letting the plugin resolve the contents
+on demand, but we were unable to get Webpack to wait for a callback during the
+resolve stage. See pull requests [#11](https://github.com/rmarscher/virtual-module-webpack-plugin/pull/11)
+and [#12](https://github.com/rmarscher/virtual-module-webpack-plugin/pull/12).
+Pull requests to solve the problem are welcome, but it needs to work even if the
+asynchronous content request takes a while. You can uncomment code in
+`test/integration/cases/contents-async/webpack.config.js` to test it.
+
+Here is an example of async content fetching inside webpack.config.js:
+
+```
+'use strict';
+
+const VirtualModulePlugin = require('virtual-module-webpack-plugin');
+
+function contents() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve('a');
+    }, 1000);
+  });
+}
+
+module.exports = contents().then(asyncContents => ({
+  entry: './index',
+  plugins: [
+    new VirtualModulePlugin({
+      moduleName: './a.txt',
+      contents: asyncContents,
+    }),
+  ],
+}));
+```

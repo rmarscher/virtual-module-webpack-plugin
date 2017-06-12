@@ -19,11 +19,15 @@ class VirtualModulePlugin {
       contents = this.options.contents;
     }
     if (typeof this.options.contents === 'object') {
-      contents = JSON.stringify(this.options.contents);
+      if (typeof this.options.contents.then !== 'function') {
+        contents = JSON.stringify(this.options.contents);
+      }
     }
     if (typeof this.options.contents === 'function') {
-      // call then function must be return string
       contents = this.options.contents();
+    }
+    if (typeof contents === 'string') {
+      contents = Promise.resolve(contents);
     }
 
     function resolverPlugin(request, cb) {
@@ -44,14 +48,12 @@ class VirtualModulePlugin {
         VirtualModulePlugin.populateFilesystem({ fs, modulePath, contents: data, ctime });
       };
 
+      const resolved = contents.then(resolve);
       if (!cb) {
-        resolve(contents);
         return;
       }
 
-      Promise.resolve(contents)
-        .then(resolve)
-        .then(cb);
+      resolved.then(cb);
     }
 
     if (!compiler.resolvers.normal) {

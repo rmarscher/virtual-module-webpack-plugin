@@ -53,7 +53,7 @@ class VirtualModulePlugin {
         return;
       }
 
-      resolved.then(cb);
+      resolved.then(() => cb());
     }
 
     if (!compiler.resolvers.normal) {

@@ -69,29 +69,26 @@ class VirtualModulePlugin {
     const fs = options.fs;
     const modulePath = options.modulePath;
     const contents = options.contents;
-    const isMapAvailable = typeof Map !== 'undefined';
+    const mapIsAvailable = typeof Map !== 'undefined';
+    const statStorageIsMap = mapIsAvailable && fs._statStorage.data instanceof Map;
+    const readFileStorageIsMap = mapIsAvailable && fs._readFileStorage.data instanceof Map;
 
-    if (isMapAvailable && fs._readFileStorage.data instanceof Map) {
-      // enhanced-resolve@3.4.0 or greater
+    if (readFileStorageIsMap) { // enhanced-resolve@3.4.0 or greater
       if (fs._readFileStorage.data.has(modulePath)) {
         return;
       }
-    } else if (fs._readFileStorage.data[modulePath]) {
-      // enhanced-resolve@3.3.0 or lower
+    } else if (fs._readFileStorage.data[modulePath]) { // enhanced-resolve@3.3.0 or lower
       return;
     }
     const stats = VirtualModulePlugin.createStats(options);
-    if (isMapAvailable && fs._statStorage.data instanceof Map) {
-      // enhanced-resolve@3.4.0 or greater
+    if (statStorageIsMap) { // enhanced-resolve@3.4.0 or greater
       fs._statStorage.data.set(modulePath, [null, stats]);
     } else { // enhanced-resolve@3.3.0 or lower
       fs._statStorage.data[modulePath] = [null, stats];
     }
-    if (isMapAvailable && fs._readFileStorage.data instanceof Map) {
-      // enhanced-resolve@3.4.0 or greater
+    if (readFileStorageIsMap) { // enhanced-resolve@3.4.0 or greater
       fs._readFileStorage.data.set(modulePath, [null, contents]);
-    } else {
-      // enhanced-resolve@3.3.0 or lower
+    } else { // enhanced-resolve@3.3.0 or lower
       fs._readFileStorage.data[modulePath] = [null, contents];
     }
   }

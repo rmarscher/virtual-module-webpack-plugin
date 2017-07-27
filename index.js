@@ -58,10 +58,10 @@ class VirtualModulePlugin {
 
     if (!compiler.resolvers.normal) {
       compiler.plugin('after-resolvers', () => {
-        compiler.resolvers.normal.plugin('resolve', resolverPlugin);
+        compiler.resolvers.normal.plugin('before-resolve', resolverPlugin);
       });
     } else {
-      compiler.resolvers.normal.plugin('resolve', resolverPlugin);
+      compiler.resolvers.normal.plugin('before-resolve', resolverPlugin);
     }
   }
 
@@ -69,12 +69,12 @@ class VirtualModulePlugin {
     const fs = options.fs;
     const modulePath = options.modulePath;
     const contents = options.contents;
-    if (fs._readFileStorage.data[modulePath]) {
+    if (fs._readFileStorage.data.has(modulePath)) {
       return;
     }
     const stats = VirtualModulePlugin.createStats(options);
-    fs._statStorage.data[modulePath] = [null, stats];
-    fs._readFileStorage.data[modulePath] = [null, contents];
+    fs._statStorage.data.set(modulePath, [null, stats]);
+    fs._readFileStorage.data.set(modulePath, [null, contents]);
   }
 
   static statsDate(inputDate) {

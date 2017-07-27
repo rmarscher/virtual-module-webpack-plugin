@@ -69,22 +69,29 @@ class VirtualModulePlugin {
     const fs = options.fs;
     const modulePath = options.modulePath;
     const contents = options.contents;
-    if (fs._readFileStorage.data instanceof Map) { // enhanced-resolve@3.4.0 or greater
+    const isMapAvailable = typeof Map !== 'undefined';
+
+    if (isMapAvailable && fs._readFileStorage.data instanceof Map) {
+      // enhanced-resolve@3.4.0 or greater
       if (fs._readFileStorage.data.has(modulePath)) {
         return;
       }
-    } else if (fs._readFileStorage.data[modulePath]) { // enhanced-resolve@3.3.0 or lower
+    } else if (fs._readFileStorage.data[modulePath]) {
+      // enhanced-resolve@3.3.0 or lower
       return;
     }
     const stats = VirtualModulePlugin.createStats(options);
-    if (fs._statStorage.data instanceof Map) { // enhanced-resolve@3.4.0 or greater
+    if (isMapAvailable && fs._statStorage.data instanceof Map) {
+      // enhanced-resolve@3.4.0 or greater
       fs._statStorage.data.set(modulePath, [null, stats]);
     } else { // enhanced-resolve@3.3.0 or lower
       fs._statStorage.data[modulePath] = [null, stats];
     }
-    if (fs._readFileStorage.data instanceof Map) { // enhanced-resolve@3.4.0 or greater
+    if (isMapAvailable && fs._readFileStorage.data instanceof Map) {
+      // enhanced-resolve@3.4.0 or greater
       fs._readFileStorage.data.set(modulePath, [null, contents]);
-    } else { // enhanced-resolve@3.3.0 or lower
+    } else {
+      // enhanced-resolve@3.3.0 or lower
       fs._readFileStorage.data[modulePath] = [null, contents];
     }
   }

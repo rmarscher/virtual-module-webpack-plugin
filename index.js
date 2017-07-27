@@ -69,7 +69,7 @@ class VirtualModulePlugin {
     const fs = options.fs;
     const modulePath = options.modulePath;
     const contents = options.contents;
-    if (fs._statStorage.data instanceof Map) { // enhanced-resolve@3.4.0 or greater
+    if (fs._readFileStorage.data instanceof Map) { // enhanced-resolve@3.4.0 or greater
       if (fs._readFileStorage.data.has(modulePath)) {
         return;
       }

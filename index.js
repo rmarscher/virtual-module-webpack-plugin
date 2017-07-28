@@ -58,10 +58,10 @@ class VirtualModulePlugin {
 
     if (!compiler.resolvers.normal) {
       compiler.plugin('after-resolvers', () => {
-        compiler.resolvers.normal.plugin('resolve', resolverPlugin);
+        compiler.resolvers.normal.plugin('before-resolve', resolverPlugin);
       });
     } else {
-      compiler.resolvers.normal.plugin('resolve', resolverPlugin);
+      compiler.resolvers.normal.plugin('before-resolve', resolverPlugin);
     }
   }
 
@@ -69,12 +69,28 @@ class VirtualModulePlugin {
     const fs = options.fs;
     const modulePath = options.modulePath;
     const contents = options.contents;
-    if (fs._readFileStorage.data[modulePath]) {
+    const mapIsAvailable = typeof Map !== 'undefined';
+    const statStorageIsMap = mapIsAvailable && fs._statStorage.data instanceof Map;
+    const readFileStorageIsMap = mapIsAvailable && fs._readFileStorage.data instanceof Map;
+
+    if (readFileStorageIsMap) { // enhanced-resolve@3.4.0 or greater
+      if (fs._readFileStorage.data.has(modulePath)) {
+        return;
+      }
+    } else if (fs._readFileStorage.data[modulePath]) { // enhanced-resolve@3.3.0 or lower
       return;
     }
     const stats = VirtualModulePlugin.createStats(options);
-    fs._statStorage.data[modulePath] = [null, stats];
-    fs._readFileStorage.data[modulePath] = [null, contents];
+    if (statStorageIsMap) { // enhanced-resolve@3.4.0 or greater
+      fs._statStorage.data.set(modulePath, [null, stats]);
+    } else { // enhanced-resolve@3.3.0 or lower
+      fs._statStorage.data[modulePath] = [null, stats];
+    }
+    if (readFileStorageIsMap) { // enhanced-resolve@3.4.0 or greater
+      fs._readFileStorage.data.set(modulePath, [null, contents]);
+    } else { // enhanced-resolve@3.3.0 or lower
+      fs._readFileStorage.data[modulePath] = [null, contents];
+    }
   }
 
   static statsDate(inputDate) {

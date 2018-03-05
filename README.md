@@ -52,7 +52,8 @@ If you pass an object to contents, it will automatically be passed through
 `JSON.stringify`. You can also pass a function to contents which will be
 invoked at compile time with no arguments. See [pull #10](https://github.com/rmarscher/virtual-module-webpack-plugin/pull/10).
 
-See the examples directory for a complete working examples with webpack 1.x or 2.x.
+See the examples directory for a complete working examples with webpack 1.x,
+2.x and 4.x.
 
 If you need to fetch the contents asynchronously, you need to have your `webpack.config.js`
 return a Promise. It should first resolve getting your module contents and then

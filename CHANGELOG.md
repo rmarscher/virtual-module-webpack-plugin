@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.4.0] - 2018-03-04
+### Changed
+- Support for webpack 4.
+  Extra thanks to @brunomacf for pull request #20 and to the community
+  for reporting the issue.
+
 ## [0.3.0] - 2017-07-28
 ### Changed
 - Support for webpack > 2.6.1 and enhanced-resolve > 3.3.0.

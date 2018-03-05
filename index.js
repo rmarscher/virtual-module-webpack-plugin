@@ -2,6 +2,7 @@
 
 'use strict';
 
+const path = require('path');
 const VirtualStats = require('./virtual-stats');
 
 class VirtualModulePlugin {
@@ -32,7 +33,8 @@ class VirtualModulePlugin {
 
     function resolverPlugin(request, cb) {
       // populate the file system cache with the virtual module
-      const fs = this.fileSystem;
+      const fs = (this && this.fileSystem) || compiler.inputFileSystem;
+      const join = (this && this.join) || path.join;
 
       // webpack 1.x compatibility
       if (typeof request === 'string') {
@@ -41,7 +43,7 @@ class VirtualModulePlugin {
       }
 
       if (!modulePath) {
-        modulePath = this.join(compiler.context, moduleName);
+        modulePath = join(compiler.context, moduleName);
       }
 
       const resolve = (data) => {
@@ -56,12 +58,21 @@ class VirtualModulePlugin {
       resolved.then(() => cb());
     }
 
-    if (!compiler.resolvers.normal) {
-      compiler.plugin('after-resolvers', () => {
+    const waitForResolvers = !compiler.resolvers.normal;
+    function addPlugin() {
+      const useModuleFactory = !compiler.resolvers.normal.plugin;
+      if (useModuleFactory) {
+        compiler.plugin('normal-module-factory', (nmf) => {
+          nmf.plugin('before-resolve', resolverPlugin);
+        });
+      } else {
         compiler.resolvers.normal.plugin('before-resolve', resolverPlugin);
-      });
+      }
+    }
+    if (waitForResolvers) {
+      compiler.plugin('after-resolvers', addPlugin);
     } else {
-      compiler.resolvers.normal.plugin('before-resolve', resolverPlugin);
+      addPlugin();
     }
   }
 

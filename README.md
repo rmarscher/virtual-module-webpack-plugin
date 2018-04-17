@@ -9,16 +9,32 @@ file to disk.
 
 It uses private APIs of the CachedInputFileSystem of the `enhanced-resolve`
 package that Webpack uses as the module resolver. Therefore, it is inherently
-fragile and subject to be broken if the CachedInputFileSystem changes. However,
-the aspects of the CachedInputFileSystem that this plugin depends on hasn't
-changed since it was authored over three years ago.
+fragile and subject to be broken if the CachedInputFileSystem changes. Fortunately,
+the changes have not been too extensive between webpack 1.x - 4.x and this plugin
+has been updated to be compatible with all.
 
 See https://github.com/webpack/enhanced-resolve/blob/master/lib/CachedInputFileSystem.js
 
-A major item that still needs testing is how this operates with the
-webpack-dev-server. If it causes the CachedInputFileSystem to purge all of its
-cache without triggering the resolve part of the resolver plugin lifecycle,
-the virtual file would no longer exist in the cache.
+If another webpack plugin clears the CachedInputFileSystem without triggering the
+resolve event of the resolver plugin lifecycle, the virtual file will no longer be able
+to be referenced. Based off the issues received in this plugin's history, this does
+not seem to be an issue.
+
+## Difference between val-loader
+
+[val-loader](https://github.com/webpack-contrib/val-loader) is also capable of dynamically
+generating module code at build time. val-loader is a "loader" and not a "plugin." Webpack
+loaders require a file to exist in webpack's file system cache. Webpack loads the cache
+from the files on disk. This virtual-module-webpack-plugin inserts directly into webpack's
+file system cache.
+
+val-loader is better if you have a file you want to load at build time that contains all
+of the logic to dynamically fetch and return the source of that file. You also are able
+to use watch mode in development since there is a physical file to watch.
+
+virtual-module-webpack-plugin is better if you have a build script that is collecting
+stats, config or other data that you want to be able to reference in the runtime code
+without every writing that data to a source file on disk.
 
 ## Usage
 

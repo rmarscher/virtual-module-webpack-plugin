@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.4.1] - 2018-12-12
+### Changed
+- Fix deprecation warning in webpack 4. Thanks to @dlmr for pull request #26.
+
 ## [0.4.0] - 2018-03-04
 ### Changed
 - Support for webpack 4.
@@ -65,6 +69,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   solution and ended up posting this plugin as an answer.
   http://stackoverflow.com/a/36294904/304438
 
+[0.4.1]: https://github.com/rmarscher/virtual-module-webpack-plugin/compare/v0.4.0...v0.4.1
+[0.4.0]: https://github.com/rmarscher/virtual-module-webpack-plugin/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/rmarscher/virtual-module-webpack-plugin/compare/v0.2.2...v0.3.0
 [0.2.2]: https://github.com/rmarscher/virtual-module-webpack-plugin/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/rmarscher/virtual-module-webpack-plugin/compare/v0.2.0...v0.2.1

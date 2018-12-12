@@ -62,9 +62,15 @@ class VirtualModulePlugin {
     function addPlugin() {
       const useModuleFactory = !compiler.resolvers.normal.plugin;
       if (useModuleFactory) {
-        compiler.plugin('normal-module-factory', (nmf) => {
-          nmf.plugin('before-resolve', resolverPlugin);
-        });
+        if (compiler.hooks) {
+          compiler.hooks.normalModuleFactory.tap('VirtualModulePlugin', (nmf) => {
+            nmf.hooks.beforeResolve.tap('VirtualModulePlugin', resolverPlugin);
+          });
+        } else {
+          compiler.plugin('normal-module-factory', (nmf) => {
+            nmf.plugin('before-resolve', resolverPlugin);
+          });
+        }
       } else {
         compiler.resolvers.normal.plugin('before-resolve', resolverPlugin);
       }

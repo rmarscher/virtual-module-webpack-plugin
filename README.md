@@ -1,5 +1,9 @@
 # Virtual Module Webpack Plugin [![Build Status](https://travis-ci.org/rmarscher/virtual-module-webpack-plugin.svg?branch=master)](https://travis-ci.org/rmarscher/virtual-module-webpack-plugin) [![codecov.io](https://codecov.io/github/rmarscher/virtual-module-webpack-plugin/coverage.svg?branch=master)](https://codecov.io/github/rmarscher/virtual-module-webpack-plugin?branch=master) [![npm package](https://badge.fury.io/js/virtual-module-webpack-plugin.svg)](https://www.npmjs.com/package/virtual-module-webpack-plugin)
 
+**2020 Update**: Webpack 5 is out. Instead of adding Webpack 5 support to this project, it seems best to switch to use the (webpack-virtual-modules)[https://github.com/sysgears/webpack-virtual-modules] project and deprecate this project. webpack-virtual-modules was inspired by this project and adds hot reloading / file watching and makes it easier to define many virtual modules.
+
+**Original Readme**:
+
 This is an experimental plugin that adds the contents of a virtual file to
 Webpack's cached file system without writing it to disk.
 
